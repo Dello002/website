@@ -2,691 +2,507 @@
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kindertagespflege Sonnenschein – Liebevolle Betreuung in familiärer Atmosphäre</title>
-  <meta name="description" content="Kindertagespflege Sonnenschein: liebevolle Betreuung für Kinder von 0–3 Jahren. Eingewöhnung, Tagesablauf, Öffnungszeiten und Kontakt." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kindertagespflege – Minimal & stilvoll</title>
+  <meta name="description" content="Minimalistische, stilvolle Webseite für eine Kindertagespflege – nur horizontal scrollable." />
   <meta name="theme-color" content="#2f7b60" />
 
-  <!-- Optional: hübsche Schrift (bleibt trotzdem eine einzelne HTML-Datei) -->
+  <!-- Optional, aber clean -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg: #fbfbf8;
-      --card: #ffffff;
-      --text: #1b2b26;
-      --muted: #51635e;
-      --brand: #2f7b60;     /* Tannenbaum-Grün */
-      --brand2:#f0b429;     /* warmes Gelb */
-      --accent:#f08a5d;     /* zartes Korall */
-      --line: rgba(27,43,38,.12);
-      --shadow: 0 14px 40px rgba(27,43,38,.10);
-      --radius: 18px;
-      --radius2: 28px;
-      --max: 1120px;
+      --card: rgba(255,255,255,.86);
+      --text: #162521;
+      --muted:#4c5b57;
+      --line: rgba(22,37,33,.12);
+      --brand:#2f7b60;
+      --shadow: 0 16px 42px rgba(22,37,33,.10);
+      --r: 18px;
+
+      --headerH: 64px;
+      --pad: 22px;
+      --maxText: 54ch;
     }
 
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
+    html, body{
+      height:100%;
       margin:0;
+      overflow:hidden;              /* <- KEIN vertikales Scrollen auf html/body */
       font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(240,180,41,.18), transparent 55%),
-                  radial-gradient(900px 520px at 90% 10%, rgba(47,123,96,.18), transparent 50%),
-                  var(--bg);
-      line-height:1.6;
+      background:
+        radial-gradient(900px 420px at 12% 0%, rgba(47,123,96,.14), transparent 55%),
+        radial-gradient(700px 420px at 92% 8%, rgba(240,180,41,.14), transparent 50%),
+        var(--bg);
     }
 
     a{ color:inherit; text-decoration:none; }
-    a.underline{ text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:3px; }
 
-    .container{
-      width:min(var(--max), calc(100% - 40px));
-      margin-inline:auto;
+    /* EIN horizontaler Scroller für alles */
+    .scroller{
+      height:100vh;
+      overflow-x:auto;
+      overflow-y:hidden;            /* <- NUR horizontal scrollable */
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling: touch;
     }
 
-    /* Header */
+    /* Optional: Scrollbar dezent */
+    .scroller::-webkit-scrollbar{ height:10px; }
+    .scroller::-webkit-scrollbar-thumb{
+      background: rgba(22,37,33,.18);
+      border-radius: 999px;
+    }
+
+    /* Track = Gesamtbreite (Panels nebeneinander) */
+    .track{
+      width: 500vw;                 /* 5 Panels -> 500vw */
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Header: ebenfalls in 5 Panels aufgeteilt.
+       Dadurch tauchen Buttons erst auf, wenn man horizontal dahin scrollt. */
     header{
-      position:sticky; top:0; z-index:20;
+      height: var(--headerH);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
       backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      border-bottom:1px solid var(--line);
+      flex: 0 0 auto;
+      overflow:hidden;              /* keine vertikalen Überraschungen */
     }
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:14px;
+    .header-row{
+      height:100%;
+      width: 500vw;                 /* muss zur Track-Breite passen */
+      display:flex;
     }
+    .hpanel{
+      width:100vw;
+      height:100%;
+      display:flex;
+      align-items:center;
+      padding: 0 var(--pad);
+      gap: 14px;
+    }
+
     .brand{
       display:flex; align-items:center; gap:10px;
       min-width: 220px;
+      white-space:nowrap;
     }
     .logo{
-      width:42px; height:42px; border-radius:14px;
+      width:38px; height:38px;
+      border-radius: 14px;
       background: linear-gradient(135deg, var(--brand), #3aa37a);
+      box-shadow: 0 12px 28px rgba(47,123,96,.22);
       display:grid; place-items:center;
-      box-shadow: 0 10px 22px rgba(47,123,96,.22);
+      flex: 0 0 auto;
     }
-    .brand h1{
-      font-size:15px; margin:0; letter-spacing:.2px;
+    .brand .title{
+      font-weight:800;
+      letter-spacing:-.2px;
+      font-size:14px;
       line-height:1.1;
     }
-    .brand small{ display:block; color:var(--muted); font-weight:500; font-size:12px; }
-
-    nav{
-      display:flex; align-items:center; gap:18px;
-    }
-    nav a{
-      color:var(--muted);
+    .brand .sub{
       font-weight:600;
-      font-size:14px;
-      padding:10px 10px;
-      border-radius:12px;
-      transition:.2s ease;
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
     }
-    nav a:hover{ color:var(--text); background:rgba(47,123,96,.08); }
 
-    .cta{
-      display:flex; align-items:center; gap:10px;
-    }
+    .spacer{ flex:1 1 auto; }
+
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      border:1px solid var(--line);
-      background:var(--card);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding:10px 14px;
-      border-radius:14px;
-      font-weight:700;
-      font-size:14px;
-      box-shadow: 0 6px 18px rgba(27,43,38,.08);
-      transition:.2s ease;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.82);
+      font-weight:800;
+      font-size:13px;
+      box-shadow: 0 10px 26px rgba(22,37,33,.08);
+      white-space:nowrap;
     }
-    .btn:hover{ transform: translateY(-1px); }
     .btn.primary{
       border-color: transparent;
       background: linear-gradient(135deg, var(--brand), #3aa37a);
       color:white;
-      box-shadow: 0 14px 28px rgba(47,123,96,.22);
+      box-shadow: 0 16px 32px rgba(47,123,96,.22);
     }
-    .btn.primary:hover{ filter: brightness(1.02); }
-
-    /* Mobile menu button */
-    .menu-btn{
-      display:none;
-      border:1px solid var(--line);
-      background:var(--card);
-      border-radius:14px;
-      padding:10px 12px;
-      font-weight:800;
-    }
-
-    /* Hero */
-    .hero{
-      padding:44px 0 22px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:26px;
-      align-items:stretch;
-    }
-    .hero-card{
-      background: color-mix(in srgb, var(--card) 88%, transparent);
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding:28px;
-      overflow:hidden;
-      position:relative;
-    }
-    .hero-card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(360px 240px at 18% 18%, rgba(240,180,41,.25), transparent 60%),
-        radial-gradient(420px 260px at 92% 20%, rgba(47,123,96,.22), transparent 55%),
-        radial-gradient(420px 260px at 70% 110%, rgba(240,138,93,.18), transparent 55%);
-      z-index:0;
-    }
-    .hero-card > *{ position:relative; z-index:1; }
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(47,123,96,.10);
-      color:var(--brand);
-      font-weight:800;
-      letter-spacing:.2px;
-      font-size:12px;
-      margin-bottom:14px;
-    }
-    .hero h2{
-      margin:0 0 10px;
-      font-size: clamp(28px, 4vw, 42px);
-      line-height:1.12;
-      letter-spacing:-.5px;
-    }
-    .hero p{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-weight:500;
-      font-size:16px;
-      max-width: 62ch;
-    }
-    .hero-actions{
-      display:flex; gap:12px; flex-wrap:wrap;
-      margin-top:12px;
-    }
-    .mini{
-      display:flex; gap:10px; align-items:center;
-      color:var(--muted);
-      font-weight:600;
-      font-size:13px;
-      margin-top:14px;
-    }
-
-    .side-card{
-      background: color-mix(in srgb, var(--card) 92%, transparent);
-      border:1px solid var(--line);
-      border-radius: var(--radius2);
-      box-shadow: var(--shadow);
-      padding:22px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-    .side-card .badge{
-      display:flex; align-items:center; gap:10px;
-      padding:12px 14px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.75);
-    }
-    .icon{
-      width:34px; height:34px;
-      border-radius:14px;
-      display:grid; place-items:center;
-      background: rgba(240,180,41,.18);
-      border:1px solid rgba(240,180,41,.35);
-    }
-    .badge strong{ display:block; font-size:14px; }
-    .badge span{ display:block; color:var(--muted); font-size:13px; font-weight:600; }
-
-    /* Sections */
-    section{ padding:26px 0; }
-    .section-title{
-      display:flex; align-items:end; justify-content:space-between;
-      gap:18px;
-      margin-bottom:14px;
-    }
-    .section-title h3{
-      margin:0;
-      font-size:22px;
-      letter-spacing:-.3px;
-    }
-    .section-title p{
-      margin:0;
-      color:var(--muted);
-      font-weight:600;
-      max-width: 58ch;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:16px;
-    }
-    .card{
-      background: color-mix(in srgb, var(--card) 92%, transparent);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 24px rgba(27,43,38,.08);
-      padding:18px;
-    }
-    .card h4{ margin:0 0 6px; font-size:16px; letter-spacing:-.2px; }
-    .card p{ margin:0; color:var(--muted); font-weight:600; font-size:14px; }
-
-    .list{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
-    }
-    .list .card{ padding:18px 18px 14px; }
-    .list ul{
-      margin:10px 0 0;
-      padding-left:18px;
-      color:var(--muted);
-      font-weight:600;
-      font-size:14px;
-    }
-    .list li{ margin:6px 0; }
-
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:stretch;
-    }
-    .contact form{
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-    label{ font-weight:800; font-size:13px; color:var(--text); }
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.85);
-      font: inherit;
-      outline:none;
-    }
-    input:focus, textarea:focus{
-      border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
-      box-shadow: 0 0 0 4px rgba(47,123,96,.12);
-    }
-    textarea{ min-height: 120px; resize:vertical; }
 
     .hint{
-      color:var(--muted);
-      font-size:12.5px;
-      font-weight:600;
-      margin-top:8px;
-    }
-
-    /* Footer */
-    footer{
-      padding:26px 0 34px;
-      border-top:1px solid var(--line);
-      color:var(--muted);
-      font-weight:600;
-      font-size:13px;
-    }
-    .footer-grid{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px; flex-wrap:wrap;
-    }
-    .foot-links{ display:flex; gap:14px; flex-wrap:wrap; }
-    .foot-links a{ color:var(--muted); }
-    .foot-links a:hover{ color:var(--text); }
-
-    /* Responsive */
-    @media (max-width: 920px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .grid-3{ grid-template-columns: 1fr; }
-      .list{ grid-template-columns: 1fr; }
-      .contact{ grid-template-columns: 1fr; }
-      nav{ display:none; }
-      .menu-btn{ display:inline-flex; }
-      .brand{ min-width:auto; }
-    }
-    .mobile-nav{
-      display:none;
-      padding: 0 0 14px;
-    }
-    .mobile-nav a{
-      display:block;
-      padding:12px 12px;
-      border-radius:14px;
-      color:var(--muted);
+      font-size:12px;
       font-weight:700;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.7);
-      margin-top:10px;
+      color: color-mix(in srgb, var(--muted) 88%, transparent);
+      white-space:nowrap;
     }
-    .mobile-nav a:hover{ color:var(--text); }
-    .mobile-nav.open{ display:block; }
+
+    /* Main: 5 horizontale Sections */
+    main{
+      height: calc(100vh - var(--headerH));
+      overflow:hidden;              /* <- garantiert kein vertikaler Scroll */
+      flex: 1 1 auto;
+    }
+    .main-row{
+      height:100%;
+      width: 500vw;                 /* muss zur Track-Breite passen */
+      display:flex;
+    }
+
+    section{
+      width:100vw;
+      height:100%;
+      scroll-snap-align:start;
+      padding: var(--pad);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;              /* <- kein vertikaler Scroll im Panel */
+    }
+
+    .card{
+      width:min(920px, calc(100% - 0px));
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 2.6vw, 26px);
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      overflow:hidden;              /* <- auch hier sicher */
+    }
+
+    h1, h2{ margin:0; letter-spacing:-.5px; }
+    h1{ font-size: clamp(28px, 3.6vw, 44px); line-height:1.08; }
+    h2{ font-size: clamp(18px, 2.2vw, 22px); }
+    p{ margin:0; color:var(--muted); font-weight:600; max-width: var(--maxText); }
+
+    .row{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      font-weight:800;
+      font-size:12px;
+      color: color-mix(in srgb, var(--text) 86%, transparent);
+      white-space:nowrap;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(47,123,96,.12);
+    }
+
+    .navline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight:800;
+      font-size:12px;
+      user-select:none;
+    }
+    .arrow{
+      width:34px; height:34px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.78);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      box-shadow: 0 10px 20px rgba(22,37,33,.08);
+      flex: 0 0 auto;
+    }
+    .arrow:active{ transform: translateY(1px); }
+
+    /* Kleine Bild-/Dekoform (minimal) */
+    .shape{
+      position:absolute;
+      width: 540px; height: 540px;
+      border-radius: 120px;
+      background: radial-gradient(circle at 30% 20%, rgba(47,123,96,.14), transparent 55%),
+                  radial-gradient(circle at 70% 70%, rgba(240,180,41,.12), transparent 55%);
+      filter: blur(2px);
+      opacity:.9;
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+
+    .panel-wrap{
+      position:relative;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    /* Responsive: weniger Breite */
+    @media (max-width: 520px){
+      .brand{ min-width:auto; }
+      .hint{ display:none; }
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <div class="topbar">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">
-            <!-- kleines Herz/Sonne Icon -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 21s-7-4.6-9.5-9C.2 7.8 2.5 5 5.7 5c1.6 0 3 .8 3.8 2 0 0 1.2-2 4.5-2C17.5 5 19.8 7.8 21.5 12c-2.5 4.4-9.5 9-9.5 9Z" fill="white" opacity=".95"/>
-              <path d="M18 3.5 19 2m2.5 4L23 6m-5.5 5.5 1.5 1.5M14 2l-.5 2.2M9 2l.5 2.2" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
+  <!-- EIN Scroller für Header + Content (nur horizontal) -->
+  <div class="scroller" id="scroller" aria-label="Horizontales Scroll-Layout">
+    <div class="track">
+
+      <!-- HEADER (5 Panels breit) -->
+      <header>
+        <div class="header-row">
+          <!-- Panel 1 -->
+          <div class="hpanel">
+            <div class="brand">
+              <div class="logo" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 21s-7-4.6-9.5-9C.2 7.8 2.5 5 5.7 5c1.6 0 3 .8 3.8 2 0 0 1.2-2 4.5-2C17.5 5 19.8 7.8 21.5 12c-2.5 4.4-9.5 9-9.5 9Z" fill="white" opacity=".95"/>
+                </svg>
+              </div>
+              <div>
+                <div class="title">Kindertagespflege <span style="color:var(--brand)">Sonnenschein</span></div>
+                <div class="sub">minimal · ruhig · vertraut</div>
+              </div>
+            </div>
+            <div class="spacer"></div>
+            <span class="hint">Scroll →</span>
+            <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
           </div>
-          <div>
-            <h1>Kindertagespflege <span style="color:var(--brand)">Sonnenschein</span></h1>
-            <small>familiär · liebevoll · alltagsnah</small>
+
+          <!-- Panel 2 -->
+          <div class="hpanel">
+            <div class="brand" aria-hidden="true">
+              <div class="title" style="font-size:13px;color:var(--muted);font-weight:800;">Über uns</div>
+            </div>
+            <div class="spacer"></div>
+            <span class="hint">Weiter →</span>
+          </div>
+
+          <!-- Panel 3 -->
+          <div class="hpanel">
+            <div class="brand" aria-hidden="true">
+              <div class="title" style="font-size:13px;color:var(--muted);font-weight:800;">Betreuung</div>
+            </div>
+            <div class="spacer"></div>
+            <span class="hint">Weiter →</span>
+          </div>
+
+          <!-- Panel 4 -->
+          <div class="hpanel">
+            <div class="brand" aria-hidden="true">
+              <div class="title" style="font-size:13px;color:var(--muted);font-weight:800;">Öffnungszeiten</div>
+            </div>
+            <div class="spacer"></div>
+            <!-- Dieser Button taucht erst hier auf, wenn man nach rechts scrollt -->
+            <a class="btn primary" href="#kontakt" data-goto="4">Platz anfragen</a>
+          </div>
+
+          <!-- Panel 5 -->
+          <div class="hpanel">
+            <div class="brand" aria-hidden="true">
+              <div class="title" style="font-size:13px;color:var(--muted);font-weight:800;">Kontakt</div>
+            </div>
+            <div class="spacer"></div>
+            <a class="btn" href="mailto:kontakt@kinderpflege-sonnenschein.de">✉️ E-Mail</a>
           </div>
         </div>
+      </header>
 
-        <nav aria-label="Hauptnavigation">
-          <a href="#ueberblick">Überblick</a>
-          <a href="#konzept">Konzept</a>
-          <a href="#tagesablauf">Tagesablauf</a>
-          <a href="#zeiten">Öffnungszeiten</a>
-          <a href="#kontakt">Kontakt</a>
-        </nav>
+      <!-- MAIN (5 Panels breit) -->
+      <main>
+        <div class="main-row">
 
-        <div class="cta">
-          <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileNav">
-            Menü
-          </button>
-          <a class="btn" href="tel:+491234567890" aria-label="Jetzt anrufen">📞 Anrufen</a>
-          <a class="btn primary" href="#kontakt">Platz anfragen</a>
+          <!-- 1: Start -->
+          <section id="start" aria-label="Start">
+            <div class="panel-wrap">
+              <div class="shape" style="left:-160px; top:-120px;"></div>
+              <div class="card">
+                <div class="row">
+                  <span class="chip"><span class="dot"></span> Betreuung 0–3 Jahre</span>
+                  <span class="chip">Kleine Gruppe</span>
+                  <span class="chip">Familiär</span>
+                </div>
+
+                <h1>Liebevolle Kindertagespflege.<br/>Ganz schlicht. Ganz nah.</h1>
+                <p>
+                  Ein ruhiger Ort zum Ankommen, Spielen und Entdecken – mit klarer Struktur und viel Herzlichkeit.
+                </p>
+
+                <div class="row" style="margin-top:6px">
+                  <button class="arrow" type="button" data-next aria-label="Nach rechts">
+                    ➜
+                  </button>
+                  <div class="navline">
+                    <span>Scroll nach rechts für</span>
+                    <span style="color:var(--text)">Über uns</span>
+                    <span aria-hidden="true" style="opacity:.55;">·</span>
+                    <span style="color:var(--text)">Betreuung</span>
+                    <span aria-hidden="true" style="opacity:.55;">·</span>
+                    <span style="color:var(--text)">Kontakt</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 2: Über uns -->
+          <section id="ueber" aria-label="Über uns">
+            <div class="panel-wrap">
+              <div class="shape" style="right:-220px; bottom:-140px;"></div>
+              <div class="card">
+                <h2>Über uns</h2>
+                <p>
+                  Wir betreuen Kinder in einer kleinen, vertrauten Gruppe – mit Zeit, Ruhe und einer festen Bezugsperson.
+                </p>
+                <div class="row" style="margin-top:6px">
+                  <span class="chip">Sanfte Eingewöhnung</span>
+                  <span class="chip">Rituale & Struktur</span>
+                  <span class="chip">Viel frische Luft</span>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                  <button class="arrow" type="button" data-prev aria-label="Nach links">←</button>
+                  <button class="arrow" type="button" data-next aria-label="Nach rechts">➜</button>
+                  <span class="hint">nur horizontal scrollen</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3: Betreuung -->
+          <section id="betreuung" aria-label="Betreuung">
+            <div class="panel-wrap">
+              <div class="card">
+                <h2>Betreuung</h2>
+                <p>
+                  Alltag nah, kindgerecht und ohne Überladung: spielen, bewegen, essen, ruhen – in einem verlässlichen Rahmen.
+                </p>
+
+                <div class="row" style="margin-top:8px">
+                  <span class="chip">Spielen & Entdecken</span>
+                  <span class="chip">Mahlzeiten</span>
+                  <span class="chip">Ruhezeit</span>
+                  <span class="chip">Draußenzeit</span>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                  <button class="arrow" type="button" data-prev aria-label="Nach links">←</button>
+                  <button class="arrow" type="button" data-next aria-label="Nach rechts">➜</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4: Zeiten -->
+          <section id="zeiten" aria-label="Öffnungszeiten">
+            <div class="panel-wrap">
+              <div class="card">
+                <h2>Öffnungszeiten</h2>
+                <p>
+                  Mo–Fr <strong>07:30–16:30</strong> (Beispiel) · Zeiten können angepasst werden.
+                </p>
+
+                <div class="row" style="margin-top:10px">
+                  <span class="chip">Bringzeit: 07:30–09:00</span>
+                  <span class="chip">Abholen: ab 15:30</span>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                  <a class="btn primary" href="#kontakt" data-goto="4">Platz anfragen</a>
+                  <button class="arrow" type="button" data-prev aria-label="Nach links">←</button>
+                  <button class="arrow" type="button" data-next aria-label="Nach rechts">➜</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5: Kontakt -->
+          <section id="kontakt" aria-label="Kontakt">
+            <div class="panel-wrap">
+              <div class="shape" style="left:-240px; bottom:-160px;"></div>
+              <div class="card">
+                <h2>Kontakt</h2>
+                <p>
+                  Musterstraße 12 · 12345 Musterstadt<br/>
+                  <a href="tel:+491234567890" style="text-decoration:underline; text-underline-offset:3px;">+49 123 4567890</a>
+                  ·
+                  <a href="mailto:kontakt@kinderpflege-sonnenschein.de" style="text-decoration:underline; text-underline-offset:3px;">kontakt@kinderpflege-sonnenschein.de</a>
+                </p>
+
+                <div class="row" style="margin-top:10px">
+                  <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
+                  <a class="btn primary" href="mailto:kontakt@kinderpflege-sonnenschein.de?subject=Platzanfrage%20Kindertagespflege">✉️ Anfrage senden</a>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                  <button class="arrow" type="button" data-prev aria-label="Nach links">←</button>
+                  <span class="hint">Ende</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
         </div>
-      </div>
-
-      <div class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
-        <a href="#ueberblick">Überblick</a>
-        <a href="#konzept">Konzept</a>
-        <a href="#tagesablauf">Tagesablauf</a>
-        <a href="#zeiten">Öffnungszeiten</a>
-        <a href="#kontakt">Kontakt</a>
-      </div>
+      </main>
     </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <div class="kicker">
-              <span aria-hidden="true">✨</span>
-              <span>Betreuung für Kinder von <strong>0–3 Jahren</strong></span>
-            </div>
-
-            <h2>Ein sicherer Ort zum Wachsen, Spielen und Entdecken.</h2>
-            <p>
-              In der Kindertagespflege Sonnenschein betreuen wir Ihr Kind in einer kleinen Gruppe
-              mit viel Nähe, Struktur und Freude am Alltag. Sanfte Eingewöhnung, klare Abläufe und
-              liebevolle Förderung stehen bei uns im Mittelpunkt.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn primary" href="#kontakt">📩 Kennenlernen vereinbaren</a>
-              <a class="btn" href="#konzept">🌿 Unser Konzept</a>
-            </div>
-
-            <div class="mini">
-              <span aria-hidden="true">📍</span>
-              <span><strong>Ort:</strong> Musterstraße 12, 12345 Musterstadt</span>
-              <span style="opacity:.6">·</span>
-              <span><strong>Kleingruppe:</strong> 5 Kinder</span>
-            </div>
-          </div>
-
-          <aside class="side-card" aria-label="Highlights">
-            <div class="badge">
-              <div class="icon" aria-hidden="true">🧸</div>
-              <div>
-                <strong>Familiäre Atmosphäre</strong>
-                <span>Kleine Gruppe, feste Bezugsperson</span>
-              </div>
-            </div>
-            <div class="badge">
-              <div class="icon" aria-hidden="true">🥕</div>
-              <div>
-                <strong>Frisch & ausgewogen</strong>
-                <span>Kindgerechte Mahlzeiten (Allergien möglich)</span>
-              </div>
-            </div>
-            <div class="badge">
-              <div class="icon" aria-hidden="true">🌤️</div>
-              <div>
-                <strong>Viel Bewegung</strong>
-                <span>Tägliche Spielzeit drinnen & draußen</span>
-              </div>
-            </div>
-            <div class="badge">
-              <div class="icon" aria-hidden="true">🧩</div>
-              <div>
-                <strong>Alltagsnahe Förderung</strong>
-                <span>Sprache, Motorik, Selbstständigkeit</span>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:6px">
-              <h4>Freie Plätze</h4>
-              <p>Aktuell: <strong>nach Anfrage</strong> · Start: <strong>flexibel</strong> (je nach Eingewöhnung)</p>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section id="ueberblick">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h3>Was Sie bei uns erwartet</h3>
-            <p>Einfach, transparent und herzlich – damit Sie sich von Anfang an wohlfühlen.</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h4>Sanfte Eingewöhnung</h4>
-            <p>Schrittweise, individuell und in Ihrem Tempo – angelehnt an bewährte Eingewöhnungsmodelle.</p>
-          </div>
-          <div class="card">
-            <h4>Feste Rituale</h4>
-            <p>Routinen geben Sicherheit: Begrüßung, Mahlzeiten, Ruhezeit und gemeinsame Spielmomente.</p>
-          </div>
-          <div class="card">
-            <h4>Elternkommunikation</h4>
-            <p>Kurze Tür-und-Angel-Gespräche, regelmäßige Updates und ein offenes Ohr für Ihre Fragen.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="konzept">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h3>Unser Konzept</h3>
-            <p>Kindgerecht, wertschätzend und alltagsnah – mit Raum für Persönlichkeit.</p>
-          </div>
-        </div>
-
-        <div class="list">
-          <div class="card">
-            <h4>Leitgedanke</h4>
-            <p>Wir begleiten Kinder dabei, selbstständig zu werden, ihre Welt zu erkunden und soziale Sicherheit zu gewinnen.</p>
-            <ul>
-              <li>Beziehung & Bindung als Grundlage</li>
-              <li>Spiel als wichtigste Lernform</li>
-              <li>Individuelle Förderung ohne Druck</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h4>Schwerpunkte</h4>
-            <p>Mit kleinen Impulsen fördern wir Sprache, Motorik und Kreativität – im Alltag integriert.</p>
-            <ul>
-              <li>Sprachförderung durch Vorlesen, Lieder, Reime</li>
-              <li>Fein- & Grobmotorik durch Bewegung und Basteln</li>
-              <li>Soziales Lernen: Teilen, Warten, Empathie</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tagesablauf">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h3>Beispiel-Tagesablauf</h3>
-            <p>Der Ablauf ist flexibel – wir passen ihn an Alter, Bedürfnisse und Wetter an.</p>
-          </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h4>07:30 – 09:00 · Ankommen</h4>
-            <p>Freies Spiel, ruhiges Ankommen, kurze Übergabe, Begrüßungsritual.</p>
-          </div>
-          <div class="card">
-            <h4>09:00 – 11:30 · Entdecken</h4>
-            <p>Frühstück, Angebote (Basteln/Musik), draußen spielen, kleine Ausflüge.</p>
-          </div>
-          <div class="card">
-            <h4>11:30 – 14:00 · Ruhe & Essen</h4>
-            <p>Mittagessen, Zähne putzen, Mittagsschlaf/Entspannung, Aufwachen in Ruhe.</p>
-          </div>
-          <div class="card">
-            <h4>14:00 – 15:30 · Snack & Spiel</h4>
-            <p>Vesper, Bewegung, Bücher, kreative Spiele – je nach Tagesform.</p>
-          </div>
-          <div class="card">
-            <h4>15:30 – 16:30 · Abholen</h4>
-            <p>Freies Spiel, Tagesrückblick, Abholzeit mit kurzer Übergabe.</p>
-          </div>
-          <div class="card">
-            <h4>Besonderheiten</h4>
-            <p>Geburtstage, saisonale Projekte, Laternenzeit, kleine Feste im Jahreskreis.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="zeiten">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h3>Öffnungszeiten & Rahmen</h3>
-            <p>Hier können Sie die wichtigsten Infos direkt eintragen oder später anpassen.</p>
-          </div>
-        </div>
-
-        <div class="list">
-          <div class="card">
-            <h4>Öffnungszeiten</h4>
-            <ul>
-              <li><strong>Mo – Fr:</strong> 07:30 – 16:30 Uhr</li>
-              <li><strong>Bringzeit:</strong> 07:30 – 09:00 Uhr</li>
-              <li><strong>Abholzeit:</strong> ab 15:30 Uhr</li>
-              <li><strong>Schließzeiten:</strong> nach Absprache / Ferienregelung</li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h4>Kosten & Anmeldung</h4>
-            <ul>
-              <li><strong>Kosten:</strong> i. d. R. über das Jugendamt / kommunale Regelung</li>
-              <li><strong>Verpflegung:</strong> Pauschale möglich (bitte eintragen)</li>
-              <li><strong>Anmeldung:</strong> Erstgespräch → Kennenlernen → Vertrag → Eingewöhnung</li>
-              <li><strong>Unterlagen:</strong> Impfausweis, Notfallkontakte, Allergien</li>
-            </ul>
-            <p class="hint">Hinweis: Bitte passen Sie diesen Abschnitt an Ihre örtlichen Vorgaben an.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="kontakt">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <h3>Kontakt</h3>
-            <p>Schreiben Sie uns – wir melden uns zeitnah zurück. (Platzhalter bitte anpassen.)</p>
-          </div>
-        </div>
-
-        <div class="contact">
-          <div class="card">
-            <h4>So erreichen Sie uns</h4>
-            <p>
-              <strong>Telefon:</strong> <a class="underline" href="tel:+491234567890">+49 123 4567890</a><br/>
-              <strong>E-Mail:</strong> <a class="underline" href="mailto:kontakt@kinderpflege-sonnenschein.de">kontakt@kinderpflege-sonnenschein.de</a><br/>
-              <strong>Adresse:</strong> Musterstraße 12, 12345 Musterstadt
-            </p>
-
-            <p class="hint">
-              Tipp: Wenn Sie eine Google-Maps Karte einbauen möchten, ersetzen Sie unten den Link oder fügen Sie ein Embed ein.
-            </p>
-
-            <a class="btn" style="margin-top:12px" href="https://maps.google.com/?q=Musterstraße+12+12345+Musterstadt" target="_blank" rel="noopener">
-              📍 Route öffnen
-            </a>
-          </div>
-
-          <div class="card">
-            <h4>Platz anfragen</h4>
-
-            <!-- Einfaches Formular: öffnet Mailprogramm (kein Backend nötig) -->
-            <form action="mailto:kontakt@kinderpflege-sonnenschein.de" method="post" enctype="text/plain">
-              <div>
-                <label for="name">Ihr Name</label>
-                <input id="name" name="Name" autocomplete="name" placeholder="Max Mustermann" required />
-              </div>
-
-              <div>
-                <label for="email">Ihre E-Mail</label>
-                <input id="email" name="E-Mail" type="email" autocomplete="email" placeholder="max@mail.de" required />
-              </div>
-
-              <div>
-                <label for="start">Wunschtermin (Start)</label>
-                <input id="start" name="Wunschtermin" type="month" />
-              </div>
-
-              <div>
-                <label for="msg">Nachricht</label>
-                <textarea id="msg" name="Nachricht" placeholder="Alter des Kindes, gewünschte Betreuungszeiten, Besonderheiten (Allergien) …" required></textarea>
-              </div>
-
-              <button class="btn primary" type="submit">📨 Anfrage senden</button>
-              <div class="hint">Mit Klick wird Ihr E-Mail-Programm geöffnet. Für ein „echtes“ Webformular brauchen Sie ein kleines Backend.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          © <span id="year"></span> Kindertagespflege Sonnenschein · Alle Rechte vorbehalten
-        </div>
-        <div class="foot-links">
-          <a href="#kontakt">Kontakt</a>
-          <a href="#" onclick="alert('Platzhalter: Hier Impressum einfügen.'); return false;">Impressum</a>
-          <a href="#" onclick="alert('Platzhalter: Hier Datenschutzerklärung einfügen.'); return false;">Datenschutz</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  </div>
 
   <script>
-    // Jahr im Footer
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Nur horizontales Scrollen: Buttons (← / →) scrollen genau 1 "Seite" weiter.
+    const scroller = document.getElementById('scroller');
 
-    // Mobile Menü
-    const btn = document.getElementById("menuBtn");
-    const nav = document.getElementById("mobileNav");
+    function scrollByPage(dir){
+      const w = window.innerWidth;
+      scroller.scrollBy({ left: dir * w, top: 0, behavior: 'smooth' });
+    }
 
-    btn?.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      btn.setAttribute("aria-expanded", String(isOpen));
-    });
+    document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => scrollByPage(1)));
+    document.querySelectorAll('[data-prev]').forEach(b => b.addEventListener('click', () => scrollByPage(-1)));
 
-    // Schließt mobile nav nach Klick
-    nav?.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        nav.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
+    // "Platz anfragen" / Links: sauber zur richtigen Panel-Position scrollen
+    document.querySelectorAll('[data-goto]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = Number(a.getAttribute('data-goto') || 0); // 0..4
+        scroller.scrollTo({ left: idx * window.innerWidth, top: 0, behavior: 'smooth' });
       });
     });
+
+    // Falls jemand #anker nutzt: auf das passende Panel scrollen (horizontal)
+    function syncHashToScroll(){
+      const hash = (location.hash || '').replace('#','');
+      const map = { start:0, ueber:1, betreuung:2, zeiten:3, kontakt:4 };
+      if(hash in map){
+        scroller.scrollTo({ left: map[hash] * window.innerWidth, top: 0, behavior: 'smooth' });
+      }
+    }
+    window.addEventListener('hashchange', syncHashToScroll);
+    // optional initial
+    // syncHashToScroll();
   </script>
 </body>
 </html>
