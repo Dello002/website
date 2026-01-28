@@ -1,137 +1,370 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kindertagespflege</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kindertagespflege – Minimal & stilvoll</title>
+  <meta name="description" content="Minimalistische, stilvolle Webseite für eine Kindertagespflege – nur vertikal scrollable." />
+  <meta name="theme-color" content="#2f7b60" />
 
-```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        line-height: 1.8;
-        color: #2c3e50;
-        background: #ffffff;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#fbfbf8;
+      --card: rgba(255,255,255,.9);
+      --text:#162521;
+      --muted:#4c5b57;
+      --line: rgba(22,37,33,.12);
+      --brand:#2f7b60;
+      --shadow: 0 16px 42px rgba(22,37,33,.10);
+      --r: 18px;
+
+      --max: 1020px;
+      --pad: 22px;
+      --headerH: 64px;
     }
 
-    .container {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: 80px 30px;
+    *{ box-sizing:border-box; }
+    html, body{
+      margin:0;
+      height:100%;
+      font-family:"Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 420px at 12% 0%, rgba(47,123,96,.14), transparent 55%),
+        radial-gradient(700px 420px at 92% 8%, rgba(240,180,41,.14), transparent 50%),
+        var(--bg);
+
+      overflow-x:hidden;   /* ✅ kein horizontal scroll */
+      overflow-y:auto;     /* ✅ nur vertikal scroll */
     }
 
-    h1 {
-        font-size: 2.8em;
-        font-weight: 300;
-        margin-bottom: 15px;
-        letter-spacing: -1px;
+    /* Extra Schutz gegen horizontales "Wackeln" durch zu breite Elemente */
+    body{ max-width: 100vw; }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{
+      width:min(var(--max), calc(100% - (var(--pad) * 2)));
+      margin: 0 auto;
     }
 
-    .intro {
-        font-size: 1.3em;
-        color: #7f8c8d;
-        margin-bottom: 80px;
-        font-weight: 300;
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      height:var(--headerH);
+      border-bottom:1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(10px);
+      display:flex;
+      align-items:center;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      width:100%;
+      justify-content:space-between;
     }
 
-    section {
-        margin-bottom: 70px;
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 240px;
+      white-space:nowrap;
+    }
+    .logo{
+      width:38px; height:38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), #3aa37a);
+      box-shadow: 0 12px 28px rgba(47,123,96,.22);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .title{
+      font-weight:800;
+      letter-spacing:-.2px;
+      font-size:14px;
+      line-height:1.1;
+    }
+    .sub{
+      font-weight:600;
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
     }
 
-    h2 {
-        font-size: 1.1em;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 25px;
-        color: #95a5a6;
+    nav{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    nav a{
+      font-weight:800;
+      font-size:13px;
+      color:var(--muted);
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid transparent;
+      transition:.2s ease;
+    }
+    nav a:hover{
+      color:var(--text);
+      border-color: rgba(47,123,96,.20);
+      background: rgba(47,123,96,.06);
     }
 
-    p {
-        margin-bottom: 20px;
-        font-size: 1.05em;
-        color: #34495e;
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      white-space:nowrap;
     }
 
-    .contact {
-        border-top: 1px solid #ecf0f1;
-        padding-top: 50px;
-        margin-top: 80px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      font-weight:800;
+      font-size:13px;
+      box-shadow: 0 10px 26px rgba(22,37,33,.08);
+    }
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand), #3aa37a);
+      color:white;
+      box-shadow: 0 16px 32px rgba(47,123,96,.22);
     }
 
-    .contact-item {
-        margin-bottom: 15px;
-        font-size: 1.1em;
+    /* Layout */
+    main{ padding: 28px 0 36px; }
+
+    .hero{
+      position:relative;
+      margin-top: 10px;
+      padding: 22px;
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: calc(var(--r) + 6px);
+      box-shadow: var(--shadow);
+      overflow:hidden; /* verhindert horizontales Überlaufen durch Deko */
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 260px at 10% 10%, rgba(47,123,96,.16), transparent 60%),
+        radial-gradient(420px 260px at 90% 20%, rgba(240,180,41,.14), transparent 55%);
+      pointer-events:none;
+    }
+    .hero > *{ position:relative; }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(47,123,96,.10);
+      color: var(--brand);
+      font-weight:900;
+      font-size:12px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+    }
+    p{
+      margin:0;
+      color:var(--muted);
+      font-weight:600;
+      max-width: 62ch;
     }
 
-    .contact-item a {
-        color: #2c3e50;
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s;
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      font-weight:900;
+      font-size:12px;
+      color: color-mix(in srgb, var(--text) 86%, transparent);
+    }
+    .dot{
+      width:9px; height:9px; border-radius:999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(47,123,96,.12);
+      flex: 0 0 auto;
     }
 
-    .contact-item a:hover {
-        border-bottom-color: #2c3e50;
+    section{
+      padding: 22px 0;
+    }
+    .card{
+      padding: 18px;
+      background: var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: 0 10px 26px rgba(22,37,33,.08);
+      overflow:hidden; /* wieder Schutz */
+    }
+    h2{
+      margin:0 0 8px;
+      letter-spacing:-.3px;
+      font-size: 20px;
     }
 
-    @media (max-width: 600px) {
-        .container {
-            padding: 50px 20px;
-        }
-
-        h1 {
-            font-size: 2em;
-        }
-
-        .intro {
-            font-size: 1.1em;
-        }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
-</style>
-```
+    .muted{ color:var(--muted); font-weight:700; }
 
+    footer{
+      padding: 18px 0 34px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      nav{ display:none; }
+    }
+    @media (max-width: 740px){
+      .grid{ grid-template-columns: 1fr; }
+      .brand{ min-width:auto; }
+    }
+  </style>
 </head>
+
 <body>
+  <header>
     <div class="container">
-        <h1>Kindertagespflege</h1>
-        <p class="intro">Liebevolle Betreuung in familiärer Atmosphäre</p>
-
-```
-    <section>
-        <h2>Willkommen</h2>
-        <p>Mein Name ist [Ihr Name]. Ich biete Kindertagespflege an und betreue Kinder in einer kleinen Gruppe mit viel persönlicher Aufmerksamkeit.</p>
-        <p>Jedes Kind wird individuell gefördert und bekommt die Zeit und Zuwendung, die es braucht, um sich wohlzufühlen und zu entwickeln.</p>
-    </section>
-
-    <section>
-        <h2>Angebot</h2>
-        <p>In meiner Tagespflege biete ich eine warme, sichere Umgebung mit altersgerechten Aktivitäten, gesunden Mahlzeiten und regelmäßigen Ausflügen im Freien.</p>
-        <p>Die kleine Gruppengröße ermöglicht eine intensive Betreuung und einen engen Austausch mit den Eltern.</p>
-    </section>
-
-    <section>
-        <h2>Über mich</h2>
-        <p>[Hier können Sie kurz etwas über sich, Ihre Qualifikation und Erfahrung schreiben.]</p>
-    </section>
-
-    <div class="contact">
-        <h2>Kontakt</h2>
-        <div class="contact-item">
-            <a href="mailto:ihre.email@beispiel.de">ihre.email@beispiel.de</a>
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 21s-7-4.6-9.5-9C.2 7.8 2.5 5 5.7 5c1.6 0 3 .8 3.8 2 0 0 1.2-2 4.5-2C17.5 5 19.8 7.8 21.5 12c-2.5 4.4-9.5 9-9.5 9Z" fill="white" opacity=".95"/>
+            </svg>
+          </div>
+          <div>
+            <div class="title">Kindertagespflege <span style="color:var(--brand)">Sonnenschein</span></div>
+            <div class="sub">minimal · ruhig · vertraut</div>
+          </div>
         </div>
-        <div class="contact-item">
-            <a href="tel:+49123456789">+49 123 456 789</a>
+
+        <nav aria-label="Navigation">
+          <a href="#ueber">Über uns</a>
+          <a href="#betreuung">Betreuung</a>
+          <a href="#zeiten">Zeiten</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
+          <a class="btn primary" href="#kontakt">Platz anfragen</a>
         </div>
+      </div>
     </div>
-</div>
-```
+  </header>
 
+  <main>
+    <div class="container">
+
+      <section class="hero" id="start">
+        <span class="kicker">✨ Betreuung 0–3 Jahre</span>
+        <h1>Liebevolle Kindertagespflege.<br/>Ganz schlicht. Ganz nah.</h1>
+        <p>
+          Ein ruhiger Ort zum Ankommen, Spielen und Entdecken – mit klarer Struktur und viel Herzlichkeit.
+        </p>
+
+        <div class="chips" aria-label="Highlights">
+          <span class="chip"><span class="dot"></span> Kleine Gruppe</span>
+          <span class="chip">Feste Bezugsperson</span>
+          <span class="chip">Viel draußen</span>
+        </div>
+      </section>
+
+      <section id="ueber">
+        <div class="card">
+          <h2>Über uns</h2>
+          <p>
+            Wir betreuen Kinder in einer kleinen, vertrauten Gruppe – mit Zeit, Ruhe und einer festen Bezugsperson.
+          </p>
+        </div>
+      </section>
+
+      <section id="betreuung">
+        <div class="card">
+          <h2>Betreuung</h2>
+          <p>
+            Alltag nah und ohne Überladung: spielen, bewegen, essen, ruhen – in einem verlässlichen Rahmen.
+          </p>
+        </div>
+      </section>
+
+      <section id="zeiten">
+        <div class="card">
+          <h2>Öffnungszeiten</h2>
+          <div class="grid" style="margin-top:10px">
+            <div class="muted">Mo–Fr: 07:30–16:30</div>
+            <div class="muted">Bringzeit: 07:30–09:00 · Abholen: ab 15:30</div>
+          </div>
+          <p style="margin-top:10px" class="muted">
+            (Bitte Zeiten/Schließtage nach Bedarf anpassen.)
+          </p>
+        </div>
+      </section>
+
+      <section id="kontakt">
+        <div class="card">
+          <h2>Kontakt</h2>
+          <p>
+            Musterstraße 12 · 12345 Musterstadt<br/>
+            <a href="tel:+491234567890" style="text-decoration:underline; text-underline-offset:3px;">+49 123 4567890</a>
+            ·
+            <a href="mailto:kontakt@kinderpflege-sonnenschein.de" style="text-decoration:underline; text-underline-offset:3px;">kontakt@kinderpflege-sonnenschein.de</a>
+          </p>
+
+          <div class="chips" style="margin-top:12px">
+            <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
+            <a class="btn primary" href="mailto:kontakt@kinderpflege-sonnenschein.de?subject=Platzanfrage%20Kindertagespflege">✉️ Anfrage senden</a>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        © <span id="year"></span> Kindertagespflege Sonnenschein
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
