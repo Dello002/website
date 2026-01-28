@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kindertagespflege</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,122 +15,381 @@
 
 ```
     body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        line-height: 1.8;
-        color: #2c3e50;
-        background: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+
+    .background-shapes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+    }
+
+    .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        animation: float 20s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        left: -100px;
+        animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+        right: -50px;
+        animation-delay: 3s;
+    }
+
+    .shape:nth-child(3) {
+        width: 400px;
+        height: 400px;
+        bottom: -150px;
+        left: 30%;
+        animation-delay: 7s;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        33% {
+            transform: translate(30px, -30px) rotate(120deg);
+        }
+        66% {
+            transform: translate(-20px, 20px) rotate(240deg);
+        }
     }
 
     .container {
-        max-width: 700px;
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 80px 30px;
+        padding: 40px 20px;
+    }
+
+    header {
+        text-align: center;
+        padding: 60px 20px;
+        animation: fadeInDown 1s ease;
     }
 
     h1 {
-        font-size: 2.8em;
-        font-weight: 300;
-        margin-bottom: 15px;
-        letter-spacing: -1px;
+        font-size: 4em;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+        animation: fadeInScale 1.2s ease;
     }
 
-    .intro {
-        font-size: 1.3em;
-        color: #7f8c8d;
-        margin-bottom: 80px;
+    .tagline {
+        font-size: 1.4em;
+        color: rgba(255,255,255,0.9);
         font-weight: 300;
+        animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .content-card {
+        background: white;
+        border-radius: 30px;
+        padding: 60px;
+        margin: 40px auto;
+        max-width: 900px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        animation: slideUp 1s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .content-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     }
 
     section {
-        margin-bottom: 70px;
+        margin-bottom: 50px;
+        animation: fadeIn 1.5s ease;
     }
 
     h2 {
-        font-size: 1.1em;
+        font-size: 2em;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 25px;
-        color: #95a5a6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 20px;
     }
 
     p {
-        margin-bottom: 20px;
-        font-size: 1.05em;
-        color: #34495e;
-    }
-
-    .contact {
-        border-top: 1px solid #ecf0f1;
-        padding-top: 50px;
-        margin-top: 80px;
-    }
-
-    .contact-item {
-        margin-bottom: 15px;
         font-size: 1.1em;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
     }
 
-    .contact-item a {
-        color: #2c3e50;
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+    }
+
+    .feature {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 20px;
+        transition: all 0.4s ease;
+        animation: fadeIn 2s ease;
+    }
+
+    .feature:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+    }
+
+    .feature-icon {
+        font-size: 3em;
+        margin-bottom: 15px;
+        animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .feature h3 {
+        font-size: 1.3em;
+        color: #667eea;
+        margin-bottom: 10px;
+    }
+
+    .feature p {
+        font-size: 0.95em;
+        color: #666;
+    }
+
+    .contact-section {
+        text-align: center;
+        padding: 50px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 30px;
+        margin-top: 50px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        animation: slideUp 1.5s ease;
+    }
+
+    .contact-section h2 {
+        color: white;
+        -webkit-text-fill-color: white;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    .contact-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: white;
+        color: #667eea;
+        padding: 18px 35px;
+        border-radius: 50px;
         text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.3s;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .contact-item a:hover {
-        border-bottom-color: #2c3e50;
+    .contact-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        background: #f8f9fa;
     }
 
-    @media (max-width: 600px) {
-        .container {
-            padding: 50px 20px;
-        }
+    .icon {
+        font-size: 1.3em;
+    }
 
+    @media (max-width: 768px) {
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
         }
 
-        .intro {
-            font-size: 1.1em;
+        .content-card {
+            padding: 40px 30px;
+            border-radius: 20px;
         }
+
+        .features {
+            grid-template-columns: 1fr;
+        }
+
+        .contact-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px;
+        color: rgba(255,255,255,0.8);
+        font-size: 0.9em;
     }
 </style>
 ```
 
 </head>
 <body>
-    <div class="container">
-        <h1>Kindertagespflege</h1>
-        <p class="intro">Liebevolle Betreuung in familiärer Atmosphäre</p>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
 ```
-    <section>
-        <h2>Willkommen</h2>
-        <p>Mein Name ist [Ihr Name]. Ich biete Kindertagespflege an und betreue Kinder in einer kleinen Gruppe mit viel persönlicher Aufmerksamkeit.</p>
-        <p>Jedes Kind wird individuell gefördert und bekommt die Zeit und Zuwendung, die es braucht, um sich wohlzufühlen und zu entwickeln.</p>
-    </section>
+<div class="container">
+    <header>
+        <h1>Kindertagespflege</h1>
+        <p class="tagline">Mit Herz, Geduld und viel Liebe für Ihr Kind</p>
+    </header>
 
-    <section>
-        <h2>Angebot</h2>
-        <p>In meiner Tagespflege biete ich eine warme, sichere Umgebung mit altersgerechten Aktivitäten, gesunden Mahlzeiten und regelmäßigen Ausflügen im Freien.</p>
-        <p>Die kleine Gruppengröße ermöglicht eine intensive Betreuung und einen engen Austausch mit den Eltern.</p>
-    </section>
+    <div class="content-card">
+        <section>
+            <h2>Herzlich Willkommen</h2>
+            <p>Mein Name ist [Ihr Name] und ich biete liebevolle Kindertagespflege in einer familiären und geborgenen Umgebung an. Jedes Kind ist einzigartig und verdient individuelle Aufmerksamkeit.</p>
+            <p>In meiner kleinen Gruppe kann sich Ihr Kind in seinem eigenen Tempo entwickeln, die Welt entdecken und wichtige soziale Fähigkeiten lernen.</p>
+        </section>
 
-    <section>
-        <h2>Über mich</h2>
-        <p>[Hier können Sie kurz etwas über sich, Ihre Qualifikation und Erfahrung schreiben.]</p>
-    </section>
+        <section>
+            <h2>Was ich biete</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Kreativität</h3>
+                    <p>Spiel, Spaß und kreative Aktivitäten für die Entwicklung</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🍎</div>
+                    <h3>Gesunde Ernährung</h3>
+                    <p>Frische, ausgewogene Mahlzeiten täglich zubereitet</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Natur erleben</h3>
+                    <p>Regelmäßige Ausflüge und Zeit an der frischen Luft</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Kleine Gruppe</h3>
+                    <p>Individuelle Betreuung in familiärer Atmosphäre</p>
+                </div>
+            </div>
+        </section>
 
-    <div class="contact">
-        <h2>Kontakt</h2>
-        <div class="contact-item">
-            <a href="mailto:ihre.email@beispiel.de">ihre.email@beispiel.de</a>
-        </div>
-        <div class="contact-item">
-            <a href="tel:+49123456789">+49 123 456 789</a>
+        <section>
+            <h2>Über mich</h2>
+            <p>[Hier können Sie etwas über sich schreiben – Ihre Qualifikation, Erfahrung und was Sie motiviert, mit Kindern zu arbeiten.]</p>
+            <p>Die Arbeit mit Kindern ist meine Leidenschaft. Mir ist es wichtig, dass sich jedes Kind bei mir wohlfühlt und ich gemeinsam mit den Eltern die bestmögliche Entwicklung begleiten kann.</p>
+        </section>
+    </div>
+
+    <div class="contact-section">
+        <h2>Nehmen Sie Kontakt auf</h2>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.2em; margin-bottom: 30px;">
+            Ich freue mich darauf, Sie und Ihr Kind kennenzulernen!
+        </p>
+        <div class="contact-buttons">
+            <a href="mailto:ihre.email@beispiel.de" class="contact-btn">
+                <span class="icon">📧</span>
+                ihre.email@beispiel.de
+            </a>
+            <a href="tel:+49123456789" class="contact-btn">
+                <span class="icon">📱</span>
+                +49 123 456 789
+            </a>
         </div>
     </div>
+
+    <footer>
+        © 2025 Kindertagespflege - Mit Liebe gestaltet
+    </footer>
 </div>
 ```
 
