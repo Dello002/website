@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Buchhaltungsservice – zuverlässig, klar, professionell</title>
-  <meta name="description" content="Buchhaltungsservice für Selbstständige & kleine Unternehmen: laufende Buchhaltung, Belegorganisation, Auswertungen, Vorbereitung für den Steuerberater." />
-  <meta name="theme-color" content="#1f6f5b" />
+  <title>Kindertagespflege – Minimal & stilvoll</title>
+  <meta name="description" content="Minimalistische, stilvolle Webseite für eine Kindertagespflege – nur vertikal scrollable." />
+  <meta name="theme-color" content="#2f7b60" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,19 +13,18 @@
 
   <style>
     :root{
-      --bg:#f7faf9;
-      --card: rgba(255,255,255,.92);
-      --text:#0f1f1b;
-      --muted:#4a5d57;
-      --line: rgba(15,31,27,.12);
-      --brand:#1f6f5b;
-      --brand2:#0f9d7a;
-      --shadow: 0 16px 42px rgba(15,31,27,.10);
+      --bg:#fbfbf8;
+      --card: rgba(255,255,255,.9);
+      --text:#162521;
+      --muted:#4c5b57;
+      --line: rgba(22,37,33,.12);
+      --brand:#2f7b60;
+      --shadow: 0 16px 42px rgba(22,37,33,.10);
       --r: 18px;
 
-      --max: 1080px;
+      --max: 1020px;
       --pad: 22px;
-      --headerH: 66px;
+      --headerH: 64px;
     }
 
     *{ box-sizing:border-box; }
@@ -35,22 +34,23 @@
       font-family:"Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(900px 520px at 8% 0%, rgba(31,111,91,.14), transparent 55%),
-        radial-gradient(800px 520px at 92% 8%, rgba(15,157,122,.10), transparent 55%),
-        radial-gradient(700px 420px at 50% 110%, rgba(240,180,41,.10), transparent 55%),
+        radial-gradient(900px 420px at 12% 0%, rgba(47,123,96,.14), transparent 55%),
+        radial-gradient(700px 420px at 92% 8%, rgba(240,180,41,.14), transparent 50%),
         var(--bg);
+
       overflow-x:hidden;   /* ✅ kein horizontal scroll */
-      overflow-y:auto;     /* ✅ vertikal scroll */
+      overflow-y:auto;     /* ✅ nur vertikal scroll */
     }
-    body{ max-width:100vw; }
+
+    /* Extra Schutz gegen horizontales "Wackeln" durch zu breite Elemente */
+    body{ max-width: 100vw; }
 
     a{ color:inherit; text-decoration:none; }
     .container{
       width:min(var(--max), calc(100% - (var(--pad) * 2)));
-      margin:0 auto;
+      margin: 0 auto;
     }
 
-    /* Header */
     header{
       position:sticky;
       top:0;
@@ -65,20 +65,21 @@
     .topbar{
       display:flex;
       align-items:center;
-      justify-content:space-between;
       gap:14px;
       width:100%;
+      justify-content:space-between;
     }
+
     .brand{
       display:flex; align-items:center; gap:10px;
-      min-width: 220px;
+      min-width: 240px;
       white-space:nowrap;
     }
     .logo{
-      width:40px; height:40px;
-      border-radius:14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      box-shadow: 0 14px 30px rgba(31,111,91,.20);
+      width:38px; height:38px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), #3aa37a);
+      box-shadow: 0 12px 28px rgba(47,123,96,.22);
       display:grid; place-items:center;
       flex: 0 0 auto;
     }
@@ -89,7 +90,7 @@
       line-height:1.1;
     }
     .sub{
-      font-weight:700;
+      font-weight:600;
       color:var(--muted);
       font-size:12px;
       margin-top:2px;
@@ -113,8 +114,8 @@
     }
     nav a:hover{
       color:var(--text);
-      border-color: rgba(31,111,91,.22);
-      background: rgba(31,111,91,.06);
+      border-color: rgba(47,123,96,.20);
+      background: rgba(47,123,96,.06);
     }
 
     .actions{
@@ -123,6 +124,7 @@
       align-items:center;
       white-space:nowrap;
     }
+
     .btn{
       display:inline-flex;
       align-items:center;
@@ -130,37 +132,38 @@
       padding:10px 14px;
       border-radius:14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.85);
       font-weight:800;
       font-size:13px;
-      box-shadow: 0 10px 26px rgba(15,31,27,.08);
+      box-shadow: 0 10px 26px rgba(22,37,33,.08);
     }
     .btn.primary{
       border-color: transparent;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      background: linear-gradient(135deg, var(--brand), #3aa37a);
       color:white;
-      box-shadow: 0 18px 36px rgba(31,111,91,.20);
+      box-shadow: 0 16px 32px rgba(47,123,96,.22);
     }
 
-    /* Sections */
-    main{ padding: 28px 0 40px; }
-    section{ padding: 18px 0; }
+    /* Layout */
+    main{ padding: 28px 0 36px; }
 
     .hero{
       position:relative;
-      padding: 26px;
-      border-radius: calc(var(--r) + 6px);
+      margin-top: 10px;
+      padding: 22px;
       background: var(--card);
       border:1px solid var(--line);
+      border-radius: calc(var(--r) + 6px);
       box-shadow: var(--shadow);
-      overflow:hidden;
+      overflow:hidden; /* verhindert horizontales Überlaufen durch Deko */
     }
     .hero::before{
       content:"";
-      position:absolute; inset:-2px;
+      position:absolute;
+      inset:-2px;
       background:
-        radial-gradient(520px 320px at 12% 12%, rgba(31,111,91,.14), transparent 60%),
-        radial-gradient(520px 320px at 88% 18%, rgba(15,157,122,.12), transparent 55%);
+        radial-gradient(420px 260px at 10% 10%, rgba(47,123,96,.16), transparent 60%),
+        radial-gradient(420px 260px at 90% 20%, rgba(240,180,41,.14), transparent 55%);
       pointer-events:none;
     }
     .hero > *{ position:relative; }
@@ -171,23 +174,22 @@
       gap:10px;
       padding:8px 12px;
       border-radius:999px;
-      background: rgba(31,111,91,.10);
+      background: rgba(47,123,96,.10);
       color: var(--brand);
       font-weight:900;
       font-size:12px;
     }
     h1{
       margin:14px 0 10px;
-      font-size: clamp(28px, 4vw, 46px);
-      line-height:1.06;
-      letter-spacing:-.7px;
-      max-width: 22ch;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.08;
+      letter-spacing:-.6px;
     }
-    .lead{
+    p{
       margin:0;
       color:var(--muted);
-      font-weight:650;
-      max-width: 68ch;
+      font-weight:600;
+      max-width: 62ch;
     }
 
     .chips{
@@ -203,216 +205,57 @@
       padding:8px 12px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.70);
       font-weight:900;
       font-size:12px;
       color: color-mix(in srgb, var(--text) 86%, transparent);
     }
     .dot{
       width:9px; height:9px; border-radius:999px;
-      background: var(--brand2);
-      box-shadow: 0 0 0 4px rgba(15,157,122,.12);
-      flex:0 0 auto;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(47,123,96,.12);
+      flex: 0 0 auto;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 14px;
+    section{
+      padding: 22px 0;
     }
     .card{
       padding: 18px;
       background: var(--card);
       border:1px solid var(--line);
       border-radius: var(--r);
-      box-shadow: 0 10px 26px rgba(15,31,27,.08);
-      overflow:hidden;
+      box-shadow: 0 10px 26px rgba(22,37,33,.08);
+      overflow:hidden; /* wieder Schutz */
     }
     h2{
       margin:0 0 8px;
       letter-spacing:-.3px;
       font-size: 20px;
     }
-    p{
-      margin:0;
-      color:var(--muted);
-      font-weight:650;
-      max-width: 70ch;
-    }
 
-    .list{
-      margin: 10px 0 0;
-      padding: 0;
-      list-style:none;
-      display:grid;
-      gap:10px;
-    }
-    .li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.70);
-      font-weight:800;
-      color: color-mix(in srgb, var(--text) 88%, transparent);
-    }
-    .li span{
-      font-weight:700;
-      color:var(--muted);
-    }
-    .check{
-      width:28px; height:28px;
-      border-radius: 12px;
-      display:grid; place-items:center;
-      background: rgba(31,111,91,.10);
-      border:1px solid rgba(31,111,91,.22);
-      flex: 0 0 auto;
-    }
-
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .step{
-      padding: 16px;
-      border-radius: var(--r);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.76);
-    }
-    .step b{
-      display:inline-flex;
-      width:26px; height:26px;
-      border-radius: 10px;
-      background: rgba(15,157,122,.12);
-      border:1px solid rgba(15,157,122,.20);
-      align-items:center;
-      justify-content:center;
-      margin-bottom: 8px;
-    }
-    .step h3{
-      margin:0 0 6px;
-      font-size: 15px;
-      letter-spacing:-.2px;
-    }
-    .step p{
-      font-size: 13.5px;
-      font-weight:650;
-    }
-
-    .pricing{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .price{
-      padding: 18px;
-      border-radius: calc(var(--r) + 6px);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.80);
-      box-shadow: 0 10px 26px rgba(15,31,27,.08);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      overflow:hidden;
-    }
-    .price .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.70);
-      font-weight:900;
-      font-size:12px;
-      width:fit-content;
-    }
-    .price .sum{
-      font-size: 26px;
-      font-weight:900;
-      letter-spacing:-.5px;
-    }
-    .price .small{
-      font-size: 12.5px;
-      font-weight:750;
-      color:var(--muted);
-      margin-top:-6px;
-    }
-    .price ul{
-      margin: 6px 0 0;
-      padding-left: 18px;
-      color:var(--muted);
-      font-weight:700;
-      font-size: 13px;
-      line-height:1.5;
-    }
-    .price .ctaRow{
-      margin-top:auto;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    /* Contact */
-    .contact{
+    .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
     }
-    label{
-      font-weight:900;
-      font-size:12.5px;
-      color: color-mix(in srgb, var(--text) 90%, transparent);
-    }
-    input, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.88);
-      font: inherit;
-      outline: none;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(15,157,122,.35);
-      box-shadow: 0 0 0 4px rgba(15,157,122,.12);
-    }
-    textarea{ min-height: 120px; resize: vertical; }
-
-    .hint{
-      margin-top: 8px;
-      color:var(--muted);
-      font-weight:700;
-      font-size:12.5px;
-    }
+    .muted{ color:var(--muted); font-weight:700; }
 
     footer{
       padding: 18px 0 34px;
       border-top:1px solid var(--line);
       color:var(--muted);
-      font-weight:750;
+      font-weight:700;
       font-size:13px;
     }
-    .foot{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .foot a{ color:var(--muted); }
-    .foot a:hover{ color:var(--text); }
 
     /* Responsive */
-    @media (max-width: 980px){
+    @media (max-width: 920px){
       nav{ display:none; }
+    }
+    @media (max-width: 740px){
       .grid{ grid-template-columns: 1fr; }
-      .steps{ grid-template-columns: 1fr; }
-      .pricing{ grid-template-columns: 1fr; }
-      .contact{ grid-template-columns: 1fr; }
+      .brand{ min-width:auto; }
     }
   </style>
 </head>
@@ -423,29 +266,26 @@
       <div class="topbar">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <!-- kleines "Buch/Check" Icon -->
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 4h9a3 3 0 0 1 3 3v13H9a3 3 0 0 0-3 3V4Z" fill="white" opacity=".95"/>
-              <path d="M6 4h9a3 3 0 0 1 3 3v13H9a3 3 0 0 0-3 3" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M8.2 11.2l1.6 1.6 3.6-3.6" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 21s-7-4.6-9.5-9C.2 7.8 2.5 5 5.7 5c1.6 0 3 .8 3.8 2 0 0 1.2-2 4.5-2C17.5 5 19.8 7.8 21.5 12c-2.5 4.4-9.5 9-9.5 9Z" fill="white" opacity=".95"/>
             </svg>
           </div>
           <div>
-            <div class="title">Buchhaltungsservice <span style="color:var(--brand)">Mustername</span></div>
-            <div class="sub">klar · zuverlässig · termintreu</div>
+            <div class="title">Kindertagespflege <span style="color:var(--brand)">Sonnenschein</span></div>
+            <div class="sub">minimal · ruhig · vertraut</div>
           </div>
         </div>
 
         <nav aria-label="Navigation">
-          <a href="#leistungen">Leistungen</a>
-          <a href="#ablauf">Ablauf</a>
-          <a href="#preise">Pakete</a>
+          <a href="#ueber">Über uns</a>
+          <a href="#betreuung">Betreuung</a>
+          <a href="#zeiten">Zeiten</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
 
         <div class="actions">
           <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
-          <a class="btn primary" href="#kontakt">Kostenloses Erstgespräch</a>
+          <a class="btn primary" href="#kontakt">Platz anfragen</a>
         </div>
       </div>
     </div>
@@ -454,240 +294,70 @@
   <main>
     <div class="container">
 
-      <!-- HERO -->
       <section class="hero" id="start">
-        <span class="kicker">📌 Für Selbstständige & kleine Unternehmen</span>
-        <h1>Ihre Buchhaltung – ordentlich, verständlich, pünktlich.</h1>
-        <p class="lead">
-          Ich unterstütze Sie bei der <strong>laufenden Buchhaltung</strong>, der Belegorganisation und der
-          Vorbereitung für den Steuerberater – damit Sie den Kopf frei haben fürs Tagesgeschäft.
+        <span class="kicker">✨ Betreuung 0–3 Jahre</span>
+        <h1>Liebevolle Kindertagespflege.<br/>Ganz schlicht. Ganz nah.</h1>
+        <p>
+          Ein ruhiger Ort zum Ankommen, Spielen und Entdecken – mit klarer Struktur und viel Herzlichkeit.
         </p>
 
         <div class="chips" aria-label="Highlights">
-          <span class="chip"><span class="dot"></span> Digitale Belege</span>
-          <span class="chip">Monatliche Auswertungen</span>
-          <span class="chip">Feste Ansprechpartnerin</span>
-        </div>
-
-        <div class="chips" style="margin-top:12px">
-          <a class="btn primary" href="#kontakt">📩 Anfrage senden</a>
-          <a class="btn" href="#leistungen">Leistungen ansehen</a>
-        </div>
-
-        <p class="hint">
-          Hinweis: Ich biete Buchhaltungsservices im Rahmen der gesetzlichen Möglichkeiten an (keine Steuerberatung).
-        </p>
-      </section>
-
-      <!-- LEISTUNGEN -->
-      <section id="leistungen">
-        <div class="grid">
-          <div class="card">
-            <h2>Leistungen</h2>
-            <p>Praktisch, strukturiert und nachvollziehbar – angepasst an Ihr Business.</p>
-
-            <ul class="list" aria-label="Leistungsübersicht">
-              <li class="li">
-                <div class="check" aria-hidden="true">✓</div>
-                <div>
-                  Laufende Buchhaltung <br><span>Sortieren, erfassen, prüfen, vorbereiten</span>
-                </div>
-              </li>
-              <li class="li">
-                <div class="check" aria-hidden="true">✓</div>
-                <div>
-                  Belegorganisation (digital & Papier) <br><span>klare Ablage, schnelle Rückfragen</span>
-                </div>
-              </li>
-              <li class="li">
-                <div class="check" aria-hidden="true">✓</div>
-                <div>
-                  Auswertungen & Überblick <br><span>Umsatz, Kosten, offene Punkte – monatlich</span>
-                </div>
-              </li>
-              <li class="li">
-                <div class="check" aria-hidden="true">✓</div>
-                <div>
-                  Vorbereitung für den Steuerberater <br><span>geordnet, vollständig, termintreu</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card">
-            <h2>Für wen?</h2>
-            <p>Ideal, wenn Sie wenig Zeit haben – aber klare Zahlen wollen.</p>
-            <div class="chips" style="margin-top:12px">
-              <span class="chip">Selbstständige</span>
-              <span class="chip">Kleinunternehmen</span>
-              <span class="chip">Freiberufler</span>
-              <span class="chip">Gastronomie</span>
-              <span class="chip">Handwerk</span>
-              <span class="chip">Online-Shops</span>
-            </div>
-
-            <div class="card" style="margin-top:14px; box-shadow:none;">
-              <h2 style="margin-bottom:6px">Was Sie bekommen</h2>
-              <p class="muted" style="font-weight:800">
-                Eine ruhige, klare Struktur – damit Sie jederzeit wissen, wo Sie stehen.
-              </p>
-            </div>
-          </div>
+          <span class="chip"><span class="dot"></span> Kleine Gruppe</span>
+          <span class="chip">Feste Bezugsperson</span>
+          <span class="chip">Viel draußen</span>
         </div>
       </section>
 
-      <!-- ABLAUF -->
-      <section id="ablauf">
+      <section id="ueber">
         <div class="card">
-          <h2>So läuft’s ab</h2>
-          <p>Ein einfacher Prozess – transparent und ohne Aufwand für Sie.</p>
-
-          <div class="steps" style="margin-top:12px">
-            <div class="step">
-              <b>1</b>
-              <h3>Kurz sprechen</h3>
-              <p>15 Minuten Kennenlernen: Bedarf, Umfang, Ziel.</p>
-            </div>
-            <div class="step">
-              <b>2</b>
-              <h3>Belege übergeben</h3>
-              <p>Digital (Upload/E-Mail) oder ordentlich gesammelt.</p>
-            </div>
-            <div class="step">
-              <b>3</b>
-              <h3>Alles sauber bereit</h3>
-              <p>Erfassung, Check, Übersicht – fertig für den Steuerberater.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PREISE -->
-      <section id="preise">
-        <div class="card">
-          <h2>Pakete (Beispiel)</h2>
-          <p>Ein fairer Einstieg – Details klären wir im Erstgespräch. (Bitte Preise anpassen.)</p>
-
-          <div class="pricing" style="margin-top:12px">
-            <div class="price">
-              <div class="tag">Start</div>
-              <div class="sum">ab 149 €</div>
-              <div class="small">pro Monat · kleiner Umfang</div>
-              <ul>
-                <li>Belegsortierung & Organisation</li>
-                <li>Laufende Erfassung</li>
-                <li>Kurzer Monats-Check</li>
-              </ul>
-              <div class="ctaRow">
-                <a class="btn primary" href="#kontakt">Anfragen</a>
-                <a class="btn" href="#leistungen">Details</a>
-              </div>
-            </div>
-
-            <div class="price" style="border-color: rgba(15,157,122,.22); box-shadow: 0 18px 44px rgba(31,111,91,.12);">
-              <div class="tag">Standard</div>
-              <div class="sum">ab 249 €</div>
-              <div class="small">pro Monat · beliebt</div>
-              <ul>
-                <li>Alles aus Start</li>
-                <li>Monatliche Übersicht</li>
-                <li>Rückfragen & Klärung</li>
-              </ul>
-              <div class="ctaRow">
-                <a class="btn primary" href="#kontakt">Erstgespräch</a>
-                <a class="btn" href="#ablauf">Ablauf</a>
-              </div>
-            </div>
-
-            <div class="price">
-              <div class="tag">Plus</div>
-              <div class="sum">ab 399 €</div>
-              <div class="small">pro Monat · mehr Volumen</div>
-              <ul>
-                <li>Mehr Belege/Monat</li>
-                <li>Zusätzliche Auswertungen</li>
-                <li>Priorisierte Bearbeitung</li>
-              </ul>
-              <div class="ctaRow">
-                <a class="btn primary" href="#kontakt">Anfragen</a>
-                <a class="btn" href="#start">Zurück</a>
-              </div>
-            </div>
-          </div>
-
-          <p class="hint" style="margin-top:12px">
-            Rechtlicher Hinweis: Keine Steuerberatung – Zusammenarbeit mit Ihrem Steuerberater jederzeit möglich.
+          <h2>Über uns</h2>
+          <p>
+            Wir betreuen Kinder in einer kleinen, vertrauten Gruppe – mit Zeit, Ruhe und einer festen Bezugsperson.
           </p>
         </div>
       </section>
 
-      <!-- KONTAKT -->
-      <section id="kontakt">
-        <div class="contact">
-          <div class="card">
-            <h2>Kontakt</h2>
-            <p>
-              <strong>Mustername</strong><br/>
-              Musterstraße 12 · 12345 Musterstadt<br/>
-              <a href="tel:+491234567890" style="text-decoration:underline; text-underline-offset:3px;">+49 123 4567890</a>
-              ·
-              <a href="mailto:kontakt@buchhaltung-muster.de" style="text-decoration:underline; text-underline-offset:3px;">kontakt@buchhaltung-muster.de</a>
-            </p>
+      <section id="betreuung">
+        <div class="card">
+          <h2>Betreuung</h2>
+          <p>
+            Alltag nah und ohne Überladung: spielen, bewegen, essen, ruhen – in einem verlässlichen Rahmen.
+          </p>
+        </div>
+      </section>
 
-            <div class="chips" style="margin-top:12px">
-              <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
-              <a class="btn primary" href="mailto:kontakt@buchhaltung-muster.de?subject=Anfrage%20Buchhaltungsservice">✉️ E-Mail schreiben</a>
-            </div>
-
-            <p class="hint">
-              Antwort in der Regel innerhalb von 24–48 Stunden (Werktage).
-            </p>
+      <section id="zeiten">
+        <div class="card">
+          <h2>Öffnungszeiten</h2>
+          <div class="grid" style="margin-top:10px">
+            <div class="muted">Mo–Fr: 07:30–16:30</div>
+            <div class="muted">Bringzeit: 07:30–09:00 · Abholen: ab 15:30</div>
           </div>
+          <p style="margin-top:10px" class="muted">
+            (Bitte Zeiten/Schließtage nach Bedarf anpassen.)
+          </p>
+        </div>
+      </section>
 
-          <div class="card">
-            <h2>Kurze Anfrage</h2>
+      <section id="kontakt">
+        <div class="card">
+          <h2>Kontakt</h2>
+          <p>
+            Musterstraße 12 · 12345 Musterstadt<br/>
+            <a href="tel:+491234567890" style="text-decoration:underline; text-underline-offset:3px;">+49 123 4567890</a>
+            ·
+            <a href="mailto:kontakt@kinderpflege-sonnenschein.de" style="text-decoration:underline; text-underline-offset:3px;">kontakt@kinderpflege-sonnenschein.de</a>
+          </p>
 
-            <!-- Kein Backend nötig: öffnet E-Mail-Programm -->
-            <form action="mailto:kontakt@buchhaltung-muster.de" method="post" enctype="text/plain">
-              <div style="display:grid; gap:10px; margin-top:10px">
-                <div>
-                  <label for="name">Name</label>
-                  <input id="name" name="Name" autocomplete="name" placeholder="Max Mustermann" required />
-                </div>
-
-                <div>
-                  <label for="company">Unternehmen (optional)</label>
-                  <input id="company" name="Unternehmen" autocomplete="organization" placeholder="Muster GmbH" />
-                </div>
-
-                <div>
-                  <label for="email">E-Mail</label>
-                  <input id="email" name="E-Mail" type="email" autocomplete="email" placeholder="max@mail.de" required />
-                </div>
-
-                <div>
-                  <label for="msg">Worum geht es?</label>
-                  <textarea id="msg" name="Nachricht" placeholder="Branche, ca. Belege/Monat, digital oder Papier, Wunschstart …" required></textarea>
-                </div>
-
-                <button class="btn primary" type="submit">📨 Anfrage senden</button>
-              </div>
-              <div class="hint">Beim Senden öffnet sich Ihr E-Mail-Programm. Für ein echtes Webformular brauchen Sie ein Backend.</div>
-            </form>
+          <div class="chips" style="margin-top:12px">
+            <a class="btn" href="tel:+491234567890">📞 Anrufen</a>
+            <a class="btn primary" href="mailto:kontakt@kinderpflege-sonnenschein.de?subject=Platzanfrage%20Kindertagespflege">✉️ Anfrage senden</a>
           </div>
         </div>
       </section>
 
       <footer>
-        <div class="container">
-          <div class="foot">
-            <div>© <span id="year"></span> Buchhaltungsservice Mustername</div>
-            <div style="display:flex; gap:14px; flex-wrap:wrap">
-              <a href="#" onclick="alert('Platzhalter: Impressum einfügen.'); return false;">Impressum</a>
-              <a href="#" onclick="alert('Platzhalter: Datenschutzerklärung einfügen.'); return false;">Datenschutz</a>
-            </div>
-          </div>
-        </div>
+        © <span id="year"></span> Kindertagespflege Sonnenschein
       </footer>
 
     </div>
